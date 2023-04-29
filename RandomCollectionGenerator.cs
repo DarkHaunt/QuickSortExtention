@@ -4,7 +4,7 @@ namespace QuickSort.AdditionScripts
     internal class RandomCollectionGenerator
     {
         private const int MaxValue = 100;
-        private static readonly Random Randomizer = new Random(TimeOnly.MaxValue.Second);
+        private static readonly Random Randomizer = new Random();
 
 
         public RandomCollectionGenerator() { }

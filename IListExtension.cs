@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,10 +10,10 @@ namespace QuickSort
 {
     internal static class IListExtension
     {
-        public static IList<T> QuickSort<T>(this IList<T> list) where T : IComparable
+        public static void QuickSort<T>(this IList<T> list) where T : IComparable
         {
             if (list.Count < 2)
-                return list;
+                return;
 
             var pivotIndex = list.Count / 2;
 
@@ -36,20 +37,22 @@ namespace QuickSort
                     continue;
                 }
 
-
                 pivotEqualsList.Add(item);
             }
 
-            var sortedLessCollection = lessList.QuickSort();
-            var sortedLargerCollection = largerList.QuickSort();
-            var sortedCollection = sortedLessCollection.Concat(pivotEqualsList).Concat(sortedLargerCollection);
+            lessList.QuickSort();
+            largerList.QuickSort();
 
-            var sortedList = new List<T>(list.Count);
+            var currentIndex = 0;
 
-            foreach (var item in sortedCollection)
-                sortedList.Add(item);
+            for (; currentIndex < lessList.Count; currentIndex++)
+                list[currentIndex] = lessList[currentIndex];      
 
-            return sortedList;
+            for (int i = 0; i < pivotEqualsList.Count; i++, currentIndex++)
+                list[currentIndex] = pivotEqualsList[i];               
+            
+            for (int i = 0; i < largerList.Count; i++, currentIndex++)
+                list[currentIndex] = largerList[i];
         }
     }
 }

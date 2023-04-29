@@ -6,7 +6,7 @@ internal class Program
     private const int CountOfElementsToCreate = 10;
 
     private static void Main(string[] args)
-    {   
+    {
         Console.WriteLine("--- Start ---\n");
 
         Console.WriteLine($"--- Count of elements - {CountOfElementsToCreate}\n");
@@ -19,10 +19,10 @@ internal class Program
 
         Console.WriteLine("--- Sorted: ---");
 
-        var sortedList = randomList.QuickSort();
+        randomList.QuickSort();
 
-        foreach (var sortedElement in sortedList)
-            Console.WriteLine($"{sortedElement}\n");
+        foreach (var randomFloat in randomList)
+            Console.WriteLine($"{randomFloat}\n");
 
         Console.ReadLine();
     }
